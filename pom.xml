@@ -4,7 +4,7 @@
   <artifactId>df2blank</artifactId>
   <version>2.30</version>
   <packaging>war</packaging>
-  <name>dfsample</name>
+  <name>df2blank</name>
   <description>dataforms2.jar blank application</description>
 	<!-- dataforms2.jarの依存ライブラリ -->
 	<dependencies>
