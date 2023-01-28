@@ -7,7 +7,6 @@ Mavenプロジェクトになっています。
 ## Install
 Eclipseからこのリポジトリをインポートしてください。
 
-
 ## Licence
 [MIT](https://github.com/takayanagi2087/dataforms/blob/master/LICENSE)
 
