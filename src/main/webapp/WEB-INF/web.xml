@@ -19,7 +19,7 @@
 	<!--
 	<context-param>
 		<param-name>java-source-path</param-name>
-		<param-value>/eclipse/workspace/project/src</param-value>
+		<param-value>/eclipse/workspace/project/src/main/java</param-value>
 	</context-param>
 	-->
 
@@ -27,7 +27,7 @@
 	<!--
 	<context-param>
 		<param-name>web-source-path</param-name>
-		<param-value>/eclipse/workspace/project/WebContent</param-value>
+		<param-value>/eclipse/workspace/project/src/main/webapp</param-value>
 	</context-param>
 	-->
 	<!-- 開発ツールでデータをエクスポート/インポートする際に使用するパスを指定します。 -->
