@@ -1,11 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>df2blank</groupId>
-  <artifactId>df2blank</artifactId>
-  <version>2.30-230329</version>
-  <packaging>war</packaging>
-  <name>df2blank</name>
-  <description>dataforms2.jar blank application</description>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>df2blank</groupId>
+	<artifactId>df2blank</artifactId>
+	<version>2.30-230329</version>
+	<packaging>war</packaging>
+	<name>df2blank</name>
+	<description>dataforms2.jar blank application</description>
+	<properties>
+		<!-- Java VMのパス　-->
+		<javacmd>C:\eclipse\pleiades\java\17\bin\java.exe</javacmd>
+		<!-- javax → jakarta パッケージ変換ツールのパス -->
+		<jakarta.transformer>C:\eclipse\transformer\org.eclipse.transformer.cli-0.5.0.jar</jakarta.transformer>
+	</properties>
 	<!-- dataforms2.jarの依存ライブラリ -->
 	<dependencies>
 		<!-- Apache commons -->
@@ -109,6 +115,7 @@
 			</resource>
 		</resources>
 		<plugins>
+			<!-- コンパイル。 -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
@@ -116,9 +123,38 @@
 					<release>17</release>
 				</configuration>
 			</plugin>
+			<!-- javax版、warファイル作成。 tomcat9のwarファイル。-->
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- jakarta版、warファイル作成。 tomcat10以降のwarファイル。 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<executable>${javacmd}</executable>
+					<arguments>
+						<argument>-jar</argument>
+						<argument>${jakarta.transformer}</argument>
+						<argument>${project.build.directory}/${project.name}-${project.version}.war</argument>
+						<argument>${project.build.directory}/jakarta.${project.name}-${project.version}.war</argument>
+					</arguments>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
