@@ -2,15 +2,27 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>df2blank</groupId>
 	<artifactId>df2blank</artifactId>
-	<version>2.30-230329</version>
+	<version>2.31</version>
 	<packaging>war</packaging>
 	<name>df2blank</name>
 	<description>dataforms2.jar blank application</description>
+	<!--
+		以下の環境変数を設定してください。
+		env.JAVA_HOME : JAVAのインストールディレクトリ (ex: C:\eclipse\pleiades\java\17)
+		env.ECLIPSE_TRANSFORMER : eclipse transformerのパス。(ex: C:\eclipse\transformer\org.eclipse.transformer.cli-0.5.0.jar)
+	-->
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Java VMのパス　-->
+		<!--
 		<javacmd>C:\eclipse\pleiades\java\17\bin\java.exe</javacmd>
+		-->
+		<javacmd>${env.JAVA_HOME}/bin/java.exe</javacmd>
 		<!-- javax → jakarta パッケージ変換ツールのパス -->
-		<jakarta.transformer>C:\eclipse\transformer\org.eclipse.transformer.cli-0.5.0.jar</jakarta.transformer>
+		<jakarta.transformer>${env.ECLIPSE_TRANSFORMER}</jakarta.transformer>
+		<dataforms2.jar>${project.basedir}/src/main/webapp/WEB-INF/lib/dataforms2-${project.version}.jar</dataforms2.jar>
+		<build.date>${maven.build.timestamp}</build.date>
+		<maven.build.timestamp.format>yyMMdd</maven.build.timestamp.format>
 	</properties>
 	<!-- dataforms2.jarの依存ライブラリ -->
 	<dependencies>
@@ -98,14 +110,15 @@
 		</dependency>
 		<!-- dataforms2.jarをsystemライブラリとして追加-->
 		<dependency>
-			<groupId>dataforms2</groupId>
+			<groupId>dataforms</groupId>
 			<artifactId>dataforms2</artifactId>
-			<version>2.30</version>
+			<version>2.31</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/dataforms2.jar</systemPath>
+			<systemPath>${dataforms2.jar}</systemPath>
 		</dependency>
 	</dependencies>
 	<build>
+		<finalName>${project.name}-${project.version}-${build.date}</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
@@ -120,7 +133,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>17</release>
+					<source>11</source>
+					<target>11</target>
 				</configuration>
 			</plugin>
 			<!-- javax版、warファイル作成。 tomcat9のwarファイル。-->
@@ -143,8 +157,9 @@
 					<arguments>
 						<argument>-jar</argument>
 						<argument>${jakarta.transformer}</argument>
-						<argument>${project.build.directory}/${project.name}-${project.version}.war</argument>
-						<argument>${project.build.directory}/jakarta.${project.name}-${project.version}.war</argument>
+						<argument>-o</argument>
+						<argument>${project.build.directory}/${project.name}-${project.version}-${build.date}.war</argument>
+						<argument>${project.build.directory}/jakarta.${project.name}-${project.version}-${build.date}.war</argument>
 					</arguments>
 				</configuration>
 				<executions>
