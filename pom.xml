@@ -21,11 +21,28 @@
 		<!-- javax → jakarta パッケージ変換ツールのパス -->
 		<jakarta.transformer>${env.ECLIPSE_TRANSFORMER}</jakarta.transformer>
 		<dataforms2.jar>${project.basedir}/src/main/webapp/WEB-INF/lib/dataforms2-${project.version}.jar</dataforms2.jar>
+		<!-- tomcat10 対応 -->
+		<fileupload.jar>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-fileupload-1.5.jar</fileupload.jar>
 		<build.date>${maven.build.timestamp}</build.date>
 		<maven.build.timestamp.format>yyMMdd</maven.build.timestamp.format>
 	</properties>
 	<!-- dataforms2.jarの依存ライブラリ -->
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-servlet-api -->
+		<!-- Tomcat 9 or 10を適切に設定してください -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>9.0.10</version>
+		</dependency>
+		<!--
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat</artifactId>
+			<version>10.1.7</version>
+			<type>pom</type>
+		</dependency>
+		-->
 		<!-- Apache commons -->
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
@@ -38,6 +55,11 @@
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.5</version>
+			<!-- tomcat10以降の場合WEB-INF/libにcommons-fileupload-1.5.jarを残して、以下のコメントを有効にしてください -->
+			<!--
+			<scope>system</scope>
+			<systemPath>${fileupload.jar}</systemPath>
+			-->
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-text -->
 		<dependency>
