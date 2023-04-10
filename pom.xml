@@ -20,11 +20,13 @@
 		<javacmd>${env.JAVA_HOME}/bin/java</javacmd>
 		<!-- javax → jakarta パッケージ変換ツールのパス -->
 		<jakarta.transformer>${env.ECLIPSE_TRANSFORMER}</jakarta.transformer>
-		<dataforms2.jar>${project.basedir}/src/main/webapp/WEB-INF/lib/dataforms2-${project.version}.jar</dataforms2.jar>
-		<!-- tomcat10 対応 -->
-		<fileupload.jar>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-fileupload-1.5.jar</fileupload.jar>
 		<build.date>${maven.build.timestamp}</build.date>
 		<maven.build.timestamp.format>yyMMdd</maven.build.timestamp.format>
+
+		<!-- dataforms2.jarはまだmavenリポジトリに登録してないのでWEB-INF/libに残してください。 -->
+		<dataforms2.jar>${project.basedir}/src/main/webapp/WEB-INF/lib/dataforms2-${project.version}.jar</dataforms2.jar>
+		<!-- Tomcat 10 の場合はWEB-INF/libにcommons-fileuploadも残してください。 -->
+		<fileupload.jar>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-fileupload-1.5.jar</fileupload.jar>
 	</properties>
 	<!-- dataforms2.jarの依存ライブラリ -->
 	<dependencies>
