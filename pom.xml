@@ -20,8 +20,12 @@
 		<javacmd>${env.JAVA_HOME}/bin/java</javacmd>
 		<!-- javax → jakarta パッケージ変換ツールのパス -->
 		<jakarta.transformer>${env.ECLIPSE_TRANSFORMER}</jakarta.transformer>
-		<build.date>${maven.build.timestamp}</build.date>
 		<maven.build.timestamp.format>yyMMdd</maven.build.timestamp.format>
+		<!-- リリース時には日付に設定する。 -->
+		<build.date>SNAPSHOT</build.date>
+		<!--
+		<build.date>${maven.build.timestamp}</build.date>
+		-->
 
 		<!-- dataforms2.jarはまだmavenリポジトリに登録してないのでWEB-INF/libに残してください。 -->
 		<dataforms2.jar>${project.basedir}/src/main/webapp/WEB-INF/lib/dataforms2-${project.version}.jar</dataforms2.jar>
