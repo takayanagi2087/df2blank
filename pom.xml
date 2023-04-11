@@ -176,21 +176,41 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>3.1.0</version>
-				<configuration>
-					<executable>${javacmd}</executable>
-					<arguments>
-						<argument>-jar</argument>
-						<argument>${jakarta.transformer}</argument>
-						<argument>-o</argument>
-						<argument>${project.build.directory}/${project.name}-${project.version}-${build.date}.war</argument>
-						<argument>${project.build.directory}/jakarta.${project.name}-${project.version}-${build.date}.war</argument>
-					</arguments>
-				</configuration>
 				<executions>
 					<execution>
+						<id>convert to jakarta package</id>
 						<phase>package</phase>
+						<configuration>
+							<executable>${javacmd}</executable>
+							<arguments>
+								<argument>-jar</argument>
+								<argument>${jakarta.transformer}</argument>
+								<argument>-o</argument>
+								<argument>${project.build.directory}/${project.name}-${project.version}-${build.date}.war</argument>
+								<argument>${project.build.directory}/jakarta.${project.name}-${project.version}-${build.date}.war</argument>
+							</arguments>
+						</configuration>
 						<goals>
 							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- ファイル名情報ファイルを作成 -->
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>write-file-name</id>
+						<phase>package</phase>
+						<configuration>
+							<target>
+								<echo message="${project.name}-${project.version}" file="${project.build.directory}/filename.txt" append="false"/>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
 						</goals>
 					</execution>
 				</executions>
