@@ -43,6 +43,37 @@
 			<groupId>jp.walking360</groupId>
 			<artifactId>dataforms2</artifactId>
 			<version>2.31</version>
+			<exclusions>
+				<!-- Excel出力を使わない場合、以下の設定を有効にする -->
+				<!--
+				<exclusion>
+					<groupId>org.apache.poi</groupId>
+					<artifactId>poi</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.poi</groupId>
+					<artifactId>poi-ooxml</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.poi</groupId>
+					<artifactId>poi-scratchpad</artifactId>
+				</exclusion>
+				-->
+				<!-- PDF出力を使わない場合、以下の設定を有効にする -->
+				<!--
+				<exclusion>
+					<groupId>org.apache.xmlgraphics</groupId>
+					<artifactId>fop</artifactId>
+				</exclusion>
+				-->
+				<!-- QRコートを使わない場合、以下の設定を有効にする -->
+				<!--
+				<exclusion>
+					<groupId>com.google.zxing</groupId>
+					<artifactId>javase</artifactId>
+				</exclusion>
+				-->
+			</exclusions>
 		</dependency>
 	</dependencies>
 	<build>
