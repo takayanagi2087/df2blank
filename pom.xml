@@ -11,15 +11,12 @@
 		env.JAVA_HOME : JAVAのインストールディレクトリ (ex: C:\eclipse\pleiades\java\17)
 		env.ECLIPSE_TRANSFORMER : eclipse transformerのパス。(ex: C:\eclipse\transformer\org.eclipse.transformer.cli-0.5.0.jar)
 	-->
-	<!--
 	<repositories>
 		<repository>
-			<id>walking360</id>
-			<name>walking360</name>
+			<id>jp.walking360</id>
 			<url>https://www.walking360.jp/mvn/repository</url>
 		</repository>
 	</repositories>
-	-->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Java VMのパス　-->
