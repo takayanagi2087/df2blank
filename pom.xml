@@ -6,118 +6,30 @@
 	<packaging>war</packaging>
 	<name>df2blank</name>
 	<description>dataforms2.jar blank application</description>
-	<!--
-		以下の環境変数を設定してください。
-		env.JAVA_HOME : JAVAのインストールディレクトリ (ex: C:\eclipse\pleiades\java\17)
-		env.ECLIPSE_TRANSFORMER : eclipse transformerのパス。(ex: C:\eclipse\transformer\org.eclipse.transformer.cli-0.5.0.jar)
-	-->
-	<repositories>
-		<repository>
-			<id>jp.walking360</id>
-			<url>https://www.walking360.jp/mvn/repository</url>
-		</repository>
-	</repositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- Java VMのパス　-->
-		<!--
-		<javacmd>C:\eclipse\pleiades\java\17\bin\java.exe</javacmd>
-		-->
-		<javacmd>${env.JAVA_HOME}/bin/java</javacmd>
-		<!-- javax → jakarta パッケージ変換ツールのパス -->
-		<jakarta.transformer>${env.ECLIPSE_TRANSFORMER}</jakarta.transformer>
 		<maven.build.timestamp.format>yyMMdd</maven.build.timestamp.format>
 		<!-- リリース時には日付に設定します。 -->
 		<build.date>SNAPSHOT</build.date>
 		<!--
 		<build.date>${maven.build.timestamp}</build.date>
 		-->
-		<dataforms2.jar>${project.basedir}/src/main/webapp/WEB-INF/lib/dataforms2-2.31.jar</dataforms2.jar>
-		<fileupload.jar>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-fileupload-1.5.jar</fileupload.jar>
 	</properties>
+	<repositories>
+		<repository>
+			<id>jp.walking360</id>
+			<url>https://www.walking360.jp/mvn/repository</url>
+		</repository>
+	</repositories>
 	<dependencies>
-		<!--
-			Tomcat 10 の場合はWEB-INF/libにdataforms2とcommons-fileuploadのjarファイルを残して以下のコメントを有効にしてください。
-			またdataforms2-x.xx.jarのscopeをsystemに変更してください。
-		-->
-		<!--
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.11.0</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.5</version>
-			<scope>system</scope>
-			<systemPath>${fileupload.jar}</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-text</artifactId>
-			<version>1.10.0</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-validator</groupId>
-			<artifactId>commons-validator</artifactId>
-			<version>1.7</version>
-		</dependency>
-		<dependency>
-			<groupId>net.arnx</groupId>
-			<artifactId>jsonic</artifactId>
-			<version>1.3.10</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.19.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>5.2.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>5.2.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-scratchpad</artifactId>
-			<version>5.2.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.xmlgraphics</groupId>
-			<artifactId>fop</artifactId>
-			<version>2.8</version>
-			<exclusions>
-				<exclusion>
-					<groupId>xml-apis</groupId>
-					<artifactId>xml-apis-ext</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>xml-apis</groupId>
-					<artifactId>xml-apis</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.google.zxing</groupId>
-			<artifactId>javase</artifactId>
-			<version>3.5.1</version>
-		</dependency>
-		-->
 		<dependency>
 			<groupId>jp.walking360</groupId>
-			<artifactId>dataforms2</artifactId>
-			<version>2.31</version>
-			<!-- tomcat10以降の場合WEB-INF/libにdataforms2-x.xx.jarを残して、以下のコメントを有効にしてください -->
+			<!-- tomcat9以前はjavax、tomcat10以後はjakartaを使用してください。!-->
+			<artifactId>javax-dataforms2</artifactId>
 			<!--
-			<scope>system</scope>
-			<systemPath>${dataforms2.jar}</systemPath>
+			<artifactId>jakarta-dataforms2</artifactId>
 			-->
+			<version>2.31</version>
 			<exclusions>
 				<!-- Excel出力を使わない場合、以下の設定を有効にしてください -->
 				<!--
@@ -171,38 +83,13 @@
 					<target>11</target>
 				</configuration>
 			</plugin>
-			<!-- javax版、warファイル作成。 tomcat9のwarファイル。-->
+			<!-- warファイル作成。-->
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.3</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- jakarta版、warファイル作成。 tomcat10以降のwarファイル。 -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>3.1.0</version>
-				<executions>
-					<execution>
-						<id>convert to jakarta package</id>
-						<phase>package</phase>
-						<configuration>
-							<executable>${javacmd}</executable>
-							<arguments>
-								<argument>-jar</argument>
-								<argument>${jakarta.transformer}</argument>
-								<argument>-o</argument>
-								<argument>${project.build.directory}/${project.name}-${project.version}-${build.date}.war</argument>
-								<argument>${project.build.directory}/jakarta.${project.name}-${project.version}-${build.date}.war</argument>
-							</arguments>
-						</configuration>
-						<goals>
-							<goal>exec</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
