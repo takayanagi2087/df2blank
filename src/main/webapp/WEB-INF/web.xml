@@ -440,6 +440,25 @@
 			}
 		</param-value>
 	</context-param>
+	<!--
+		この設定を有効にすると、認証時にユーザのメールアドレスにワンタイムパスワードを送信し
+		その確認を行います。
+	 -->
+	<context-param>
+		<param-name>onetime-password-config</param-name>
+		<param-value>
+			{
+				// ワンタイムパスワードを使用するかどうか。
+				"useOnetimePassword": false,
+				// ワンタイムパスワード文字数。
+				"length": 6,
+				// ワンタイムパスワードキャンセルクッキーの有効日数
+				// 0を指定すると毎回ワンタイムパスワードを確認します。
+				// それ以外の場合場クッキーが存在するブラウザの場合、ワンタイムパスワードのチェックは行われません。
+				"cookieExpiration": 20
+			}
+		</param-value>
+	</context-param>
 
 	<!--
 		ブラウザがクッキーを許可していることを確認する場合、trueを指定してください。
