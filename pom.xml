@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>df2blank</groupId>
+	<groupId>jp.dataforms</groupId>
 	<artifactId>df2blank</artifactId>
 	<version>2.31</version>
 	<packaging>war</packaging>
@@ -17,13 +17,13 @@
 	</properties>
 	<repositories>
 		<repository>
-			<id>jp.walking360</id>
-			<url>https://www.walking360.jp/mvn/repository</url>
+			<id>jp.dataforms</id>
+			<url>https://www.dataforms.jp/mvn/repository</url>
 		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
-			<groupId>jp.walking360</groupId>
+			<groupId>jp.dataforms</groupId>
 			<!-- tomcat9以前はjavax、tomcat10以後はjakartaを使用してください。!-->
 			<artifactId>javax-dataforms2</artifactId>
 			<!--
