@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyMMdd</maven.build.timestamp.format>
 		<!-- リリース時には日付に設定します。 -->
-		<build.date>SNAPSHOT</build.date>
+		<build.date>20230825</build.date>
 		<!--
 		<build.date>${maven.build.timestamp}</build.date>
 		-->
