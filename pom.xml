@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jp.dataforms</groupId>
 	<artifactId>df2blank</artifactId>
-	<version>2.40</version>
+	<version>2.41</version>
 	<packaging>war</packaging>
 	<name>df2blank</name>
 	<description>dataforms2.jar blank application</description>
@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyMMdd</maven.build.timestamp.format>
 		<!-- リリース時には日付に設定します。 -->
-		<build.date>20240223</build.date>
+		<build.date>SNAPSHOT</build.date>
 		<!--
 		<build.date>${maven.build.timestamp}</build.date>
 		-->
